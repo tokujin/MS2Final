@@ -5,5 +5,11 @@
 # Firmata
 
 # Arduino
+TLC5940
 https://code.google.com/p/tlc5940arduino/
 
+Unzip the Tlc5940_xxx.zip folder into the arduino/libraries/ folder.
+
+Then look at the BasicUse example (File -> Examples -> Tlc5940 -> BasicUse).
+
+Now supports servos! See the example (Sketchbook->Examples->Library-Tlc5940->Servos) and documentation.
