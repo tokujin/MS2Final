@@ -5,6 +5,8 @@
 #include "ofMain.h"
 #include "ofxOpenCv.h"
 #include "ofxMacamPs3Eye.h"
+#include "ofEvents.h"
+
 
 //#include "ofxControlPanel.h"
 
@@ -39,6 +41,24 @@ public:
     int x[104]  = {}; //output to
 	
     unsigned char * pixels;
+    
+	ofTrueTypeFont		font;
+    ofTrueTypeFont      smallFont;
+	ofArduino	ard;
+	bool		bSetupArduino;			// flag variable for setting up arduino once
+    
+private:
+    
+    void setupArduino(const int & version);
+    void digitalPinChanged(const int & pinNum);
+    void analogPinChanged(const int & pinNum);
+	void updateArduino();
+    
+    string buttonState;
+    string potValue;
+    
+    
+    
 };
 
 #endif

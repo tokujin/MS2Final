@@ -2,7 +2,10 @@
 
 //--------------------------------------------------------------
 void testApp::setup(){
-    
+	ofSetVerticalSync(true);
+	ofSetFrameRate(60);
+
+//+++ setting of ps3eye camera
 	camWidth = 624;
 	camHeight = 464;
 	
@@ -18,6 +21,25 @@ void testApp::setup(){
 //    ps3eye.setHue(0.0);
 	ps3eye.setFlicker(1);
     
+//+++
+    buttonState = "digital pin:";
+    potValue = "analog pin:";
+    
+	font.loadFont("franklinGothic.otf", 20);
+    smallFont.loadFont("franklinGothic.otf", 14);
+    
+// replace the string below with the serial port for your Arduino board
+// you can get this from the Arduino application or via command line
+// for OSX, in your terminal type "ls /dev/tty.*" to get a list of serial devices
+	ard.connect("/dev/tty.usbmodemfd121", 57600);
+// listen for EInitialized notification. this indicates that
+// the arduino is ready to receive commands and it is safe to
+// call setupArduino()
+	ofAddListener(ard.EInitialized, this, &testApp::setupArduino);
+	bSetupArduino	= false;	// flag so we setup arduino when its ready, you don't need to touch this :)
+
+
+//+++
     videoGrayscaleCvImage.allocate(camWidth, camHeight);
 	videoBgImage.allocate(camWidth, camHeight);
 	videoDiffImage.allocate(camWidth, camHeight);
@@ -29,9 +51,11 @@ void testApp::setup(){
 //--------------------------------------------------------------
 void testApp::update(){
     
-	int threshold = 10;// you can change the value here
+	int threshold = 20;// you can change the value here
 	ps3eye.update();
-	
+
+    updateArduino();
+
 	if (ps3eye.isFrameNew()){
 		
 		videoColorCvImage.setFromPixels(ps3eye.getPixels(), camWidth, camHeight);
@@ -51,7 +75,6 @@ void testApp::update(){
 void testApp::draw(){
 	
 	ofSetColor(255, 255, 255);
-	videoDiffImage.draw(20,40);
     int r =0;
     int n=0;
     unsigned char * pixels = videoDiffImage.getPixels();
@@ -78,6 +101,8 @@ void testApp::draw(){
 		}
 	}
     
+    videoDiffImage.draw(20,40);
+
     
     ps3eye.draw(20,600);
 
