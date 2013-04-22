@@ -5,11 +5,19 @@
 # Firmata
 
 # Arduino
-TLC5940
-https://code.google.com/p/tlc5940arduino/
+##TLC5940
+• https://code.google.com/p/tlc5940arduino/
 
-Unzip the Tlc5940_xxx.zip folder into the arduino/libraries/ folder.
+- Unzip the Tlc5940_xxx.zip folder into the arduino/libraries/ folder.
+- Then look at the BasicUse example (File -> Examples -> Tlc5940 -> BasicUse).
 
-Then look at the BasicUse example (File -> Examples -> Tlc5940 -> BasicUse).
+- Now supports servos! See the example (Sketchbook->Examples->Library-Tlc5940->Servos) and documentation.
 
-Now supports servos! See the example (Sketchbook->Examples->Library-Tlc5940->Servos) and documentation.
+- Documentation for Servos
+http://alex.kathack.com/codes/tlc5940arduino/html_r014/tlc__servos_8h.html
+http://pc.watch.impress.co.jp/docs/column/musashino_proto/20090924_316652.htmla
+
+
+- https://github.com/ColinHarrington/TLC5940-Arduino/blob/master/Tlc5940Mux/tlcMux_config.h
+
+- http://bildr.org/2012/03/servos-tlc5940-arduino/
