@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>FoundWorkingCopyPaths</key>
+	<array>
+		<string>/Users/tokujin</string>
+		<string>/Users/tokujin/Documents/ofX/addons/ofxKinect</string>
+		<string>/Users/tokujin/Documents/ofX/apps/myApps/MS2Final</string>
+	</array>
+	<key>LastWorkingCopyScanDate</key>
+	<date>2013-04-30T20:54:33Z</date>
+	<key>MissingFilePaths</key>
+	<array>
+		<string>/Users/tokujin/Documents/ofX/apps/myApps/MS2Final/SoundMirror/bin/SoundMirrorDebug.app</string>
+	</array>
+	<key>Version</key>
+	<integer>4</integer>
+</dict>
+</plist>

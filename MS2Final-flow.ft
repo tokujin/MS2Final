@@ -49,3 +49,16 @@ for (int i = 0; i < width; i+=48){
 
 - algorithm for this is to just 
 - http://wiki.t-o-f.info/Arduino/ExempleD%C3%A9multiplexeurPWMTLC5940?from=Arduino.TLC5940
+
+
+# TODO
+- openFrameworks
+	--OpenCV
+		cropping
+	--Control Panel
+	--PS3Eye Camera
+		adjusting
+	--Kinect
+		extraction of depth data
+- Arduino
+	--TLC5940 library 
