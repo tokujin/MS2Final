@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/tokujin/Desktop/ofX/apps/myApps/MS2Final/servos104F/src/testApp.cpp \
-  /Users/tokujin/Desktop/ofX/apps/myApps/MS2Final/servos104F/src/testApp.h \
+  /Users/tokujin/Documents/ofX/apps/myApps/MS2Final/servos104F/src/testApp.cpp \
+  /Users/tokujin/Documents/ofX/apps/myApps/MS2Final/servos104F/src/testApp.h \
   ../../../../libs/openFrameworks/ofMain.h \
   ../../../../libs/openFrameworks/utils/ofConstants.h \
   ../../../../libs/glew/include/GL/glew.h \
@@ -114,9 +114,9 @@ dependencies: \
   ../../../../libs/openFrameworks/video/ofQTKitPlayer.h \
   ../../../../libs/openFrameworks/3d/ofCamera.h \
   ../../../../libs/openFrameworks/3d/ofEasyCam.h \
-  /Users/tokujin/Desktop/ofX/apps/myApps/MS2Final/servos104F/../../../../addons/ofxOpenCv/src/ofxOpenCv.h \
+  /Users/tokujin/Documents/ofX/apps/myApps/MS2Final/servos104F/../../../../addons/ofxOpenCv/src/ofxOpenCv.h \
   ../../../../addons/ofxOpenCv/src/ofxCvConstants.h \
-  /Users/tokujin/Desktop/ofX/apps/myApps/MS2Final/servos104F/../../../../addons/ofxOpenCv/libs/opencv/include/opencv/cv.h \
+  /Users/tokujin/Documents/ofX/apps/myApps/MS2Final/servos104F/../../../../addons/ofxOpenCv/libs/opencv/include/opencv/cv.h \
   ../../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/core_c.h \
   ../../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/types_c.h \
   ../../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/core.hpp \

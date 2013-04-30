@@ -1,8 +1,8 @@
 dependencies: \
-  /Users/tokujin/Desktop/ofX/apps/myApps/MS2Final/servos104F/../../../../addons/ofxOpenCv/src/ofxCvImage.cpp \
+  /Users/tokujin/Documents/ofX/apps/myApps/MS2Final/servos104F/../../../../addons/ofxOpenCv/src/ofxCvImage.cpp \
   ../../../../addons/ofxOpenCv/src/ofxCvImage.h \
   ../../../../addons/ofxOpenCv/src/ofxCvConstants.h \
-  /Users/tokujin/Desktop/ofX/apps/myApps/MS2Final/servos104F/../../../../addons/ofxOpenCv/libs/opencv/include/opencv/cv.h \
+  /Users/tokujin/Documents/ofX/apps/myApps/MS2Final/servos104F/../../../../addons/ofxOpenCv/libs/opencv/include/opencv/cv.h \
   ../../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/core_c.h \
   ../../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/types_c.h \
   ../../../../addons/ofxOpenCv/libs/opencv/include/opencv2/core/core.hpp \
