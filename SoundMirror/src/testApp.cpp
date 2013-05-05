@@ -59,11 +59,6 @@ void testApp::update(){
 		videoDiffImage.absDiff(videoGrayscaleCvImage, videoBgImage);
 		videoDiffImage.threshold(threshold);
         
-        
-		
-		
-        
-        
 	}
 	
 }
@@ -86,17 +81,19 @@ void testApp::draw(){
                 for (int l = 0; l < 58; l+=4) {
                     valuetemp = valuetemp + pixels[(j+l) * width + (i+k)];
                     value = valuetemp / (12 * 15);
-                    //                     op[r][n] = ofMap(value, 0,255, 0,20);
-                    //                    printf("row5 collum 5 = %d\n", x[5]);
                 }
             }
             float pct = ofMap(value, 0,255, 0,20);
-            x[8*i+j] = int(pct);   //for the adjustment with the screen
+            
+            // THIS DATA WILL BE SENT TO ARDUINO
+            if (pct > 10) {
+                arr[8*i+j] = true; //COLUMN BECOMES ROW, ROW BECOMES COLLUMN HERE
+            }else{
+                arr[8*i+j] = false;
+            }
             if (pct > 10){
                 ofSetColor(155,ofRandom(255),ofRandom(255));
                 ofCircle(600 + 80 + i, 69+ j, pct);
-                //            ofSetColor(255,255,255);
-                //            ofCircle(600 + 80 + 48*3, 69 + 58*3, 3);
             }
 		}
 	}

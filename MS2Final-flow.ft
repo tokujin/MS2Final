@@ -61,4 +61,6 @@ for (int i = 0; i < width; i+=48){
 	--Kinect
 		extraction of depth data
 - Arduino
-	--TLC5940 library 
+	--TLC5940 library
+	Figure out whether to use Firmata or not.
+	
