@@ -4,16 +4,13 @@
 <dict>
 	<key>FoundWorkingCopyPaths</key>
 	<array>
-		<string>/Users/tokujin</string>
-		<string>/Users/tokujin/Documents/ofX/addons/ofxKinect</string>
 		<string>/Users/tokujin/Documents/ofX/apps/myApps/MS2Final</string>
+		<string>/Users/tokujin</string>
 	</array>
 	<key>LastWorkingCopyScanDate</key>
-	<date>2013-05-07T00:12:24Z</date>
+	<date>2013-05-07T04:11:07Z</date>
 	<key>MissingFilePaths</key>
-	<array>
-		<string>/Users/tokujin/Documents/ofX/apps/myApps/MS2Final/MovingPixels/bin/MovingPixelsDebug.app</string>
-	</array>
+	<array/>
 	<key>Version</key>
 	<integer>4</integer>
 </dict>

@@ -59,9 +59,9 @@ void testApp::update(){
     
     
     //OpenCV Part
+    int r =0;
+    int n=0;
     unsigned char * pixels = videoDiffImage.getPixels();
-    
-    int r =0, n=0; //counter for the following loops
     for (int i = 0; i < width; i+=48){
         r++;
 		for (int j = 0; j < height; j+=58){
@@ -74,13 +74,20 @@ void testApp::update(){
                     value = valuetemp / (12 * 15);
                 }
             }
-            if(ofMap(value, 0,255, 0,20) > 10){
-                pixels[13*j+i] = 15;
-            }else{pixels[13*j+i] = 0;};
+            float pct = ofMap(value, 0,255, 0,20);
             
+            // THIS DATA WILL BE SENT TO ARDUINO
+            if (pct > 10) {
+                arr[8*i+j] = true; //COLUMN BECOMES ROW, ROW BECOMES COLLUMN HERE
+            }else{
+                arr[8*i+j] = false;
+            }
+            if (pct > 10){
+                ofSetColor(155,ofRandom(255),ofRandom(255));
+                ofCircle(600 + 80 + i, 69+ j, pct);
+            }
 		}
 	}
-    
     /*
      
      for(int i=0;i<104;i++){
@@ -115,17 +122,7 @@ void testApp::draw(){
 	ofSetColor(255, 255, 255);
 	videoDiffImage.draw(20,40);
 	panel.draw();
-    ofSetColor(155,ofRandom(255),ofRandom(255));
-    for(int i=0; i++; i<104){
-        ofCircle(600 + 80 + 48 * (i%13), 69+ 58 * (i/13), pixels[i]);
 
-    }
-    
-//                // THIS DATA WILL BE SENT TO ARDUINO
-//                if (pct[j][i] > 10) {
-//                    arr[8*i+j] = '1'; //COLUMN BECOMES ROW, ROW BECOMES COLLUMN HERE
-//                }else{
-//                    arr[8*i+j] = '0';}
 
 }
 

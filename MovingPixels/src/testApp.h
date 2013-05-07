@@ -34,11 +34,12 @@ public:
     ofxCvGrayscaleImage		videoDiffImage;
     
     float value, valuetemp;
-    int test[4]= {0,0,0,0};
     
-    bool arr[104]  = {}; //output to
-	
     unsigned char * pixels;
+    
+    ofSerial mySerial;
+    unsigned char arr[104] = {};  //output to
+
 };
 
 #endif

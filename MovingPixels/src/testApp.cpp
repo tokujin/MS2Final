@@ -26,20 +26,27 @@ void testApp::setup(){
 	panel.setWhichColumn(0);
 	panel.addToggle("learn background ", "B_LEARN_BG", true);
 	panel.addSlider("threshold ", "THRESHOLD", 127, 0, 255, true);
-	
-	
 	panel.loadSettings("cvSettings.xml");
+    
+    //Serial
+	// arduino users check in arduino app....
+    
+	mySerial.listDevices();
+	vector <ofSerialDeviceInfo> deviceList = mySerial.getDeviceList();
+
+	mySerial.setup(0, 9600); //open the first device
+    mySerial.setup("/dev/cu.usbmodemfd121",9600);
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-    
+    //panel
 	panel.update();
-	
 	
 	bool bLearnBg = panel.getValueB("B_LEARN_BG");
 	int threshold = panel.getValueI("THRESHOLD");
 	
+    //video
 	video.update();
 	
 	if (video.isFrameNew()){
@@ -60,14 +67,7 @@ void testApp::update(){
 		videoDiffImage.threshold(threshold);
         
 	}
-	
-}
-
-//--------------------------------------------------------------
-void testApp::draw(){
-	
-	ofSetColor(255, 255, 255);
-	videoDiffImage.draw(20,40);
+    //OpenCV
     int r =0;
     int n=0;
     unsigned char * pixels = videoDiffImage.getPixels();
@@ -84,22 +84,33 @@ void testApp::draw(){
                 }
             }
             float pct = ofMap(value, 0,255, 0,20);
+            //            if (pct > 10){
+            //                ofSetColor(155,ofRandom(255),ofRandom(255));
+            //                ofCircle(600 + 80 + i, 69+ j, pct);
+            //            }
+            
             
             // THIS DATA WILL BE SENT TO ARDUINO
-            if (pct > 10) {
-                arr[8*i+j] = true; //COLUMN BECOMES ROW, ROW BECOMES COLLUMN HERE
-            }else{
-                arr[8*i+j] = false;
-            }
-            if (pct > 10){
-                ofSetColor(155,ofRandom(255),ofRandom(255));
-                ofCircle(600 + 80 + i, 69+ j, pct);
-            }
+                if (pct > 3) {
+                    arr[8*r+n] = 1; //COLUMN BECOMES ROW, ROW BECOMES COLLUMN HERE
+                }else{
+                    arr[8*r+n] = 0;
+                }
 		}
 	}
-    
-    
+//    printf("%d %d %d\n", arr[0], arr[1], arr[2]);
+    mySerial.writeBytes(&arr[0], 104);
+
+	
+}
+
+//--------------------------------------------------------------
+void testApp::draw(){
+	
+	ofSetColor(255, 255, 255);
+	videoDiffImage.draw(20,40);
 	panel.draw();
+    // visualize servo rotation
 }
 
 //--------------------------------------------------------------
