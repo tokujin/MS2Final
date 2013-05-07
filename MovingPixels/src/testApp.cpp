@@ -3,6 +3,8 @@
 //--------------------------------------------------------------
 void testApp::setup(){
     
+    
+    ofSetVerticalSync(true);
 	// setup video grabber:
 	video.initGrabber(624, 464);
 	
@@ -14,6 +16,7 @@ void testApp::setup(){
 	videoGrayscaleCvImage.allocate(width, height);
 	videoBgImage.allocate(width, height);
 	videoDiffImage.allocate(width, height);
+    modifiedImage.allocate(width, height);
 	
 	// set background color to be white:
 	ofBackground(0, 0, 0);
@@ -25,7 +28,7 @@ void testApp::setup(){
 	panel.setWhichPanel("control");
 	panel.setWhichColumn(0);
 	panel.addToggle("learn background ", "B_LEARN_BG", true);
-	panel.addSlider("threshold ", "THRESHOLD", 127, 0, 255, true);
+	panel.addSlider("threshold ", "THRESHOLD", 20, 0, 255, true);
 	panel.loadSettings("cvSettings.xml");
     
     //Serial
@@ -36,6 +39,12 @@ void testApp::setup(){
 
 	mySerial.setup(0, 9600); //open the first device
     mySerial.setup("/dev/cu.usbmodemfd121",9600);
+    
+    pct = 0;
+    
+    for (int i = 0; i < 104; i++) {
+        arr[i] = 0x00;
+    }
 }
 
 //--------------------------------------------------------------
@@ -71,35 +80,39 @@ void testApp::update(){
     int r =0;
     int n=0;
     unsigned char * pixels = videoDiffImage.getPixels();
-    for (int i = 0; i < width; i+=48){
+
+    for (int i = 0; i < 13; i++){
         r++;
-		for (int j = 0; j < height; j+=58){
+		for (int j = 0; j < 8; j++){
             n++;
             valuetemp = 0;
             value=0;
             for (int k = 0; k < 48; k+=4) {
                 for (int l = 0; l < 58; l+=4) {
-                    valuetemp = valuetemp + pixels[(j+l) * width + (i+k)];
+                    valuetemp = valuetemp + pixels[(58*j+l) * width + (48*i+k)];
                     value = valuetemp / (12 * 15);
                 }
             }
-            float pct = ofMap(value, 0,255, 0,20);
-            //            if (pct > 10){
-            //                ofSetColor(155,ofRandom(255),ofRandom(255));
-            //                ofCircle(600 + 80 + i, 69+ j, pct);
-            //            }
+            pct = ofMap(value, 0,255, 0,20);
             
-            
-            // THIS DATA WILL BE SENT TO ARDUINO
-                if (pct > 3) {
-                    arr[8*r+n] = 1; //COLUMN BECOMES ROW, ROW BECOMES COLLUMN HERE
-                }else{
-                    arr[8*r+n] = 0;
-                }
+            arr[8*i+j] = pct > 10 ? true : false;
 		}
 	}
-//    printf("%d %d %d\n", arr[0], arr[1], arr[2]);
-    mySerial.writeBytes(&arr[0], 104);
+//      cout << int(arr[0]) << endl;
+
+    for (int i=1; i < 99; i++) {
+        if(arr[i-1] == true){
+            bytesToSend[1 + (i/7)] |= (0x00000001 << (i/7));
+        }
+    }
+    
+    
+      bytesToSend[0] = 255;
+      bytesToSend[1] = 214;
+      bytesToSend[2] = ofRandom(0,100);
+      bytesToSend[3] = ofRandom(0,100);
+      bytesToSend[4] = ofMap(mouseX, 0, ofGetWidth(), 0, 253, true);
+      mySerial.writeBytes(bytesToSend, 16);
 
 	
 }
@@ -111,6 +124,12 @@ void testApp::draw(){
 	videoDiffImage.draw(20,40);
 	panel.draw();
     // visualize servo rotation
+    
+    for (int i = 0; i < 104; i++){
+        if (arr[i]) ofSetColor(255,0,0);
+        else ofSetColor(255);
+        ofRect(624 + 80 + (i/8)*48, 40 + (i%8)*58, 30,30);
+    }
 }
 
 //--------------------------------------------------------------

@@ -32,13 +32,20 @@ public:
     ofxCvGrayscaleImage		videoBgImage;
 	
     ofxCvGrayscaleImage		videoDiffImage;
+    ofxCvGrayscaleImage     modifiedImage;
+    
     
     float value, valuetemp;
     
     unsigned char * pixels;
+    unsigned char * mpixels;
+    
+    float pct = 0;
     
     ofSerial mySerial;
-    unsigned char arr[104] = {};  //output to
+    unsigned char arr[104];  //output to
+    unsigned char bytesToSend[16];  //output to
+    int test;
 
 };
 

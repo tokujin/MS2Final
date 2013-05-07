@@ -14,30 +14,34 @@ void testApp::setup(){
 	videoGrayscaleCvImage.allocate(width, height);
 	videoBgImage.allocate(width, height);
 	videoDiffImage.allocate(width, height);
-    simple.allocate(13,8);
 	
 	// set background color to be white:
 	ofBackground(0, 0, 0);
 	
-	//panel setup
+	
 	panel.setup("cv settings", 1380, 0, 300, 748);
 	panel.addPanel("control", 1, false);
+	
 	panel.setWhichPanel("control");
 	panel.setWhichColumn(0);
 	panel.addToggle("learn background ", "B_LEARN_BG", true);
 	panel.addSlider("threshold ", "THRESHOLD", 127, 0, 255, true);
+	
+	
 	panel.loadSettings("cvSettings.xml");
 }
 
 //--------------------------------------------------------------
 void testApp::update(){
-    //panel
-    panel.update();
+    
+	panel.update();
+	
+	
 	bool bLearnBg = panel.getValueB("B_LEARN_BG");
 	int threshold = panel.getValueI("THRESHOLD");
 	
-    //video
 	video.update();
+	
 	if (video.isFrameNew()){
 		
 		videoColorCvImage.setFromPixels(video.getPixels(), width, height);
@@ -55,10 +59,20 @@ void testApp::update(){
 		videoDiffImage.absDiff(videoGrayscaleCvImage, videoBgImage);
 		videoDiffImage.threshold(threshold);
         
+        
+		
+		
+        
+        
 	}
-    
-    
-    //OpenCV Part
+	
+}
+
+//--------------------------------------------------------------
+void testApp::draw(){
+	
+	ofSetColor(255, 255, 255);
+	videoDiffImage.draw(20,40);
     int r =0;
     int n=0;
     unsigned char * pixels = videoDiffImage.getPixels();
@@ -72,60 +86,24 @@ void testApp::update(){
                 for (int l = 0; l < 58; l+=4) {
                     valuetemp = valuetemp + pixels[(j+l) * width + (i+k)];
                     value = valuetemp / (12 * 15);
+                    //                     op[r][n] = ofMap(value, 0,255, 0,20);
+                    //                    printf("row5 collum 5 = %d\n", x[5]);
                 }
             }
             float pct = ofMap(value, 0,255, 0,20);
-            
-            // THIS DATA WILL BE SENT TO ARDUINO
-            if (pct > 10) {
-                arr[8*i+j] = true; //COLUMN BECOMES ROW, ROW BECOMES COLLUMN HERE
-            }else{
-                arr[8*i+j] = false;
-            }
+//            x[8*i+j] = int(pct);   //for the adjustment with the screen
             if (pct > 10){
                 ofSetColor(155,ofRandom(255),ofRandom(255));
                 ofCircle(600 + 80 + i, 69+ j, pct);
+                //            ofSetColor(255,255,255);
+                //            ofCircle(600 + 80 + 48*3, 69 + 58*3, 3);
             }
 		}
 	}
-    /*
-     
-     for(int i=0;i<104;i++){
-        if(pixel[i]==BLACK){
-            graphicalData[i] = '0';
-        }else if(pixel[i]==WHITE){
-            graphicalData[i] = '1';
-        }else{
-            //uhoh
-        }
-     }
-     
-     unsigned char graphicalData[104] = ........
-     
-     while( mySerial.writeBytes(graphicalData)<104 ){
-     
-     }
-     
-     (or)
-     
-     device.writeBytes(&graphicalData[0], 104);
-     
-    */ 
     
-
-	
-}
-
-//--------------------------------------------------------------
-void testApp::draw(){
-	
-	ofSetColor(255, 255, 255);
-	videoDiffImage.draw(20,40);
+    
 	panel.draw();
-
-
 }
-
 
 //--------------------------------------------------------------
 void testApp::keyPressed(int key){
@@ -161,4 +139,3 @@ void testApp::mouseReleased(int x, int y, int button){
 void testApp::windowResized(int w, int h){
     
 }
-
