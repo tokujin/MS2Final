@@ -30,15 +30,18 @@ public:
     ofxCvColorImage			videoColorCvImage;
     ofxCvGrayscaleImage		videoGrayscaleCvImage;
     ofxCvGrayscaleImage		videoBgImage;
+    ofxCvGrayscaleImage		simple;
+
 	
     ofxCvGrayscaleImage		videoDiffImage;
     
     float value, valuetemp;
-    int test[4]= {0,0,0,0};
         
     bool arr[104]  = {}; //output to
-	
+    int  radius[104] = {}; // circle
+    
     unsigned char * pixels;
+    unsigned int * pixelsm;
 };
 
 #endif

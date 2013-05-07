@@ -172,6 +172,37 @@ dependencies: \
   ../../../../addons/ofxOpenCv/src/ofxCvShortImage.h \
   ../../../../addons/ofxOpenCv/src/ofxCvContourFinder.h \
   ../../../../addons/ofxOpenCv/src/ofxCvHaarFinder.h \
-  /Users/tokujin/Documents/ofX/apps/myApps/MS2Final/MovingPixels/../../../../addons/ofxMacamPs3Eye/src/ofxMacamPs3Eye.h \
+  /Users/tokujin/Documents/ofX/apps/myApps/MS2Final/MovingPixels/../../../../addons/ofxControlPanel/src/ofxControlPanel.h \
+  /Users/tokujin/Documents/ofX/apps/myApps/MS2Final/MovingPixels/../../../../addons/ofxXmlSettings/src/ofxXmlSettings.h \
+  /Users/tokujin/Documents/ofX/apps/myApps/MS2Final/MovingPixels/../../../../addons/ofxXmlSettings/libs/tinyxml.h \
+  ../../../../addons/ofxControlPanel/src/guiIncludes.h \
+  ../../../../addons/ofxControlPanel/src/guiValue.h \
+  ../../../../addons/ofxControlPanel/src/guiBaseObject.h \
+  ../../../../addons/ofxControlPanel/src/simpleColor.h \
+  ../../../../addons/ofxControlPanel/src/guiColor.h \
+  ../../../../addons/ofxControlPanel/src/guiTextBase.h \
+  ../../../../addons/ofxControlPanel/src/guiCallback.h \
+  ../../../../addons/ofxControlPanel/src/guiCallbackValue.h \
+  ../../../../addons/ofxControlPanel/src/guiVariablePointer.h \
+  ../../../../addons/ofxControlPanel/src/guiTypePanel.h \
+  ../../../../addons/ofxControlPanel/src/guiTypeText.h \
+  ../../../../addons/ofxControlPanel/src/guiTypeToggle.h \
+  ../../../../addons/ofxControlPanel/src/guiTypeMultiToggle.h \
+  ../../../../addons/ofxControlPanel/src/guiTypeSlider.h \
+  ../../../../addons/ofxControlPanel/src/guiType2DSlider.h \
+  ../../../../addons/ofxControlPanel/src/guiTypeDrawable.h \
+  ../../../../addons/ofxControlPanel/src/guiTypeButtonSlider.h \
+  ../../../../addons/ofxControlPanel/src/guiTypeTextDropDown.h \
+  ../../../../addons/ofxControlPanel/src/guiTypeCustom.h \
+  ../../../../addons/ofxControlPanel/src/guiCustomImpl.h \
+  ../../../../addons/ofxControlPanel/src/guiTypeVideo.h \
+  ../../../../addons/ofxControlPanel/src/guiTypeVairableLister.h \
+  ../../../../addons/ofxControlPanel/src/guiTypeChartPlotter.h \
+  ../../../../addons/ofxControlPanel/src/guiTypeLogger.h \
+  ../../../../addons/ofxControlPanel/src/simpleLogger.h \
+  ../../../../addons/ofxControlPanel/src/guiTypeFileLister.h \
+  ../../../../addons/ofxControlPanel/src/simpleFileLister.h \
+  ../../../../addons/ofxControlPanel/src/guiTypeLabel.h \
+  ../../../../addons/ofxControlPanel/src/guiTypeTextInput.h \
   ../../../../libs/openFrameworks/app/ofAppGlutWindow.h \
   ../../../../libs/openFrameworks/app/ofAppBaseWindow.h

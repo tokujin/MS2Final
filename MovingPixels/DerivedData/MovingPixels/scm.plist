@@ -9,9 +9,11 @@
 		<string>/Users/tokujin/Documents/ofX/apps/myApps/MS2Final</string>
 	</array>
 	<key>LastWorkingCopyScanDate</key>
-	<date>2013-05-04T02:58:53Z</date>
+	<date>2013-05-07T00:12:24Z</date>
 	<key>MissingFilePaths</key>
-	<array/>
+	<array>
+		<string>/Users/tokujin/Documents/ofX/apps/myApps/MS2Final/MovingPixels/bin/MovingPixelsDebug.app</string>
+	</array>
 	<key>Version</key>
 	<integer>4</integer>
 </dict>

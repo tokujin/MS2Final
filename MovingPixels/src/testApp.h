@@ -4,11 +4,7 @@
 
 #include "ofMain.h"
 #include "ofxOpenCv.h"
-#include "ofxMacamPs3Eye.h"
-#include "ofEvents.h"
-
-
-//#include "ofxControlPanel.h"
+#include "ofxControlPanel.h"
 
 
 class testApp : public ofBaseApp{
@@ -26,39 +22,23 @@ public:
     void mouseReleased(int x, int y, int button);
     void windowResized(int w, int h);
     
-    ofVideoGrabber video;
-    int 				camWidth;
-    int 				camHeight;
-    
-    
-    ofxMacamPs3Eye ps3eye;
+    // create a variable of the type ofImage
+    ofxControlPanel			panel;
+	
+    int						width, height;
+    ofVideoGrabber			video;
     ofxCvColorImage			videoColorCvImage;
     ofxCvGrayscaleImage		videoGrayscaleCvImage;
     ofxCvGrayscaleImage		videoBgImage;
+	
     ofxCvGrayscaleImage		videoDiffImage;
     
     float value, valuetemp;
-    int x[104]  = {}; //output to
+    int test[4]= {0,0,0,0};
+    
+    bool arr[104]  = {}; //output to
 	
     unsigned char * pixels;
-    
-	ofTrueTypeFont		font;
-    ofTrueTypeFont      smallFont;
-	ofArduino	ard;
-	bool		bSetupArduino;			// flag variable for setting up arduino once
-    
-private:
-    
-    void setupArduino(const int & version);
-    void digitalPinChanged(const int & pinNum);
-    void analogPinChanged(const int & pinNum);
-	void updateArduino();
-    
-    string buttonState;
-    string potValue;
-    
-    
-    
 };
 
 #endif
