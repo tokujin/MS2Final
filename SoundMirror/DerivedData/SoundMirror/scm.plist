@@ -4,12 +4,12 @@
 <dict>
 	<key>FoundWorkingCopyPaths</key>
 	<array>
-		<string>/Users/tokujin/Documents/ofX/apps/myApps/MS2Final</string>
 		<string>/Users/tokujin/Documents/ofX/addons/ofxKinect</string>
+		<string>/Users/tokujin/Documents/ofX/apps/myApps/MS2Final</string>
 		<string>/Users/tokujin</string>
 	</array>
 	<key>LastWorkingCopyScanDate</key>
-	<date>2013-05-07T21:01:45Z</date>
+	<date>2013-05-08T00:05:46Z</date>
 	<key>MissingFilePaths</key>
 	<array/>
 	<key>Version</key>

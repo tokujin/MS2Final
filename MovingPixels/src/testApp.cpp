@@ -38,13 +38,14 @@ void testApp::setup(){
 	vector <ofSerialDeviceInfo> deviceList = mySerial.getDeviceList();
 
 	mySerial.setup(0, 9600); //open the first device
-    mySerial.setup("/dev/cu.usbmodemfd121",9600);
+    mySerial.setup("/dev/tty.usbmodemfd121",9600);
     
     pct = 0;
     
     for (int i = 0; i < 104; i++) {
         arr[i] = 0x00;
     }
+    
 }
 
 //--------------------------------------------------------------
@@ -99,20 +100,40 @@ void testApp::update(){
 		}
 	}
 //      cout << int(arr[0]) << endl;
+    
+    
+    
+    bytesToSend[0] = 255;
+    for (int i=0; i<15; i++) {
+        bytesToSend[i+1] = 0;
+    }
 
-    for (int i=1; i < 99; i++) {
-        if(arr[i-1] == true){
-            bytesToSend[1 + (i/7)] |= (0x00000001 << (i/7));
+    
+    for (int i=0; i < 104; i++) {
+        if(arr[i] == true){
+            bytesToSend[1 + (i/7)] |= (0x00000001 << (i%7));
         }
     }
     
+    mySerial.writeBytes(bytesToSend, 16);
+
     
-      bytesToSend[0] = 255;
-      bytesToSend[1] = 214;
-      bytesToSend[2] = ofRandom(0,100);
-      bytesToSend[3] = ofRandom(0,100);
-      bytesToSend[4] = ofMap(mouseX, 0, ofGetWidth(), 0, 253, true);
-      mySerial.writeBytes(bytesToSend, 16);
+    cout << "------------------------------" << endl;
+    cout <<  "bytesToSend[1]"<< " is " << (int)bytesToSend[1]  << endl;
+    cout <<  "bytesToSend[2]"<< " is " << (int)bytesToSend[2]  << endl;
+    cout <<  "bytesToSend[3]"<< " is " << (int)bytesToSend[3]  << endl;
+    cout <<  "bytesToSend[4]"<< " is " << (int)bytesToSend[4]  << endl;
+    cout <<  "bytesToSend[5]"<< " is " << (int)bytesToSend[5]  << endl;
+    cout <<  "bytesToSend[6]"<< " is " << (int)bytesToSend[6]  << endl;
+    cout <<  "bytesToSend[7]"<< " is " << (int)bytesToSend[7]  << endl;
+    cout <<  "bytesToSend[8]"<< " is " << (int)bytesToSend[8]  << endl;
+    cout <<  "bytesToSend[9]"<< " is " << (int)bytesToSend[9]  << endl;
+    cout <<  "bytesToSend[10]"<< " is " << (int)bytesToSend[10]  << endl;
+    cout <<  "bytesToSend[11]"<< " is " << (int)bytesToSend[11]  << endl;
+    cout <<  "bytesToSend[12]"<< " is " << (int)bytesToSend[12]  << endl;
+    cout <<  "bytesToSend[13]"<< " is " << (int)bytesToSend[13]  << endl;
+    cout <<  "bytesToSend[14]"<< " is " << (int)bytesToSend[14]  << endl;
+    cout <<  "bytesToSend[15]"<< " is " << (int)bytesToSend[15]  << endl;
 
 	
 }
