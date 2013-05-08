@@ -1,3 +1,12 @@
+/************************************************************************
+ *  Copyright (c) Nori & Mehdi                                          *
+ *                                                                      *
+ *                                                                      *
+ *  Written:  2013.05.10  Nori & Mehdi at Parsons                       *
+ *   This is Nori and Mehdi's Project for Major Stuio class at Parsons. *
+ Camera -> oF with OpenCV -> Arduino -> 104 Servos                      *
+ ************************************************************************/
+ 
 #include "testApp.h"
 
 //--------------------------------------------------------------
@@ -28,7 +37,7 @@ void testApp::setup(){
 	panel.setWhichPanel("control");
 	panel.setWhichColumn(0);
 	panel.addToggle("learn background ", "B_LEARN_BG", true);
-	panel.addSlider("threshold ", "THRESHOLD", 20, 0, 255, true);
+	panel.addSlider("threshold ", "THRESHOLD", 150, 0, 255, true);
 	panel.loadSettings("cvSettings.xml");
     
     //Serial
@@ -38,10 +47,11 @@ void testApp::setup(){
 	vector <ofSerialDeviceInfo> deviceList = mySerial.getDeviceList();
 
 	mySerial.setup(0, 9600); //open the first device
-    mySerial.setup("cu.usbmodemfd121",9600);
+    mySerial.setup("tty.usbmodemfd121",9600);
     
     pct = 0;
     
+    //initialize array
     for (int i = 0; i < 104; i++) {
         arr[i] = 0x00;
     }
@@ -56,7 +66,7 @@ void testApp::update(){
 	bool bLearnBg = panel.getValueB("B_LEARN_BG");
 	int threshold = panel.getValueI("THRESHOLD");
 	
-    //video
+    //video grabber, difference
 	video.update();
 	
 	if (video.isFrameNew()){
@@ -82,60 +92,47 @@ void testApp::update(){
     int n=0;
     unsigned char * pixels = videoDiffImage.getPixels();
 
-    for (int i = 0; i < 13; i++){
-        r++;
-		for (int j = 0; j < 8; j++){
-            n++;
+    //Compress image(width 624, height 484 to width 13 height 8)
+    for (int i = 0; i < 13; i++){       //devide width into 13 blocks
+		for (int j = 0; j < 8; j++){    //devide height into 8 blocks
             valuetemp = 0;
             value=0;
-            for (int k = 0; k < 48; k+=4) {
-                for (int l = 0; l < 58; l+=4) {
+            //
+            for (int k = 0; k < 48; k+=4) {       //pick up the pixels every 4 pixels
+                for (int l = 0; l < 58; l+=4) {   //pick up the pixels every 4 pixels
                     valuetemp = valuetemp + pixels[(58*j+l) * width + (48*i+k)];
-                    value = valuetemp / (12 * 15);
+                    value = valuetemp / (12 * 15);    //calculate the average
                 }
             }
-            pct = ofMap(value, 0,255, 0,20);
+            pct = ofMap(value, 0,255, 0,20);       // map the average 0 to 20
             
-            arr[8*i+j] = pct > 10 ? true : false;
+            arr[8*i+j] = pct > 5 ? true : false;   //if the average is larger than 5 then the grid is on
 		}
 	}
-//      cout << int(arr[0]) << endl;
     
     
-    
-    bytesToSend[0] = 255;
+    bytesToSend[0] = 255;     //set up header byte for serial communication
     for (int i=0; i<15; i++) {
-        bytesToSend[i+1] = 0;
+        bytesToSend[i+1] = 0; //initialize the bytes to send
     }
 
     
+    //extract boolean data and convert it to byte data
     for (int i=0; i < 104; i++) {
         if(arr[i] == true){
             bytesToSend[1 + (i/7)] |= (0x00000001 << (i%7));
         }
     }
-    
+  
+    //write serial data
     mySerial.writeBytes(bytesToSend, 16);
 
-    
+    //print out!
     cout << "------------------------------" << endl;
-    cout <<  "bytesToSend[1] "<< " is  " << (int)bytesToSend[1] << endl;
-    cout <<  "bytesToSend[2] "<< " is  " << (int)bytesToSend[2] << endl;
-    cout <<  "bytesToSend[3] "<< " is  " << (int)bytesToSend[3] << endl;
-    cout <<  "bytesToSend[4] "<< " is  " << (int)bytesToSend[4] << endl;
-    cout <<  "bytesToSend[5] "<< " is  " << (int)bytesToSend[5] << endl;
-    cout <<  "bytesToSend[6] "<< " is  " << (int)bytesToSend[6] << endl;
-    cout <<  "bytesToSend[7] "<< " is  " << (int)bytesToSend[7] << endl;
-    cout <<  "bytesToSend[8] "<< " is  " << (int)bytesToSend[8] << endl;
-    cout <<  "bytesToSend[9] "<< " is  " << (int)bytesToSend[9] << endl;
-    cout <<  "bytesToSend[10]"<< " is " << (int)bytesToSend[10] << endl;
-    cout <<  "bytesToSend[11]"<< " is " << (int)bytesToSend[11] << endl;
-    cout <<  "bytesToSend[12]"<< " is " << (int)bytesToSend[12] << endl;
-    cout <<  "bytesToSend[13]"<< " is " << (int)bytesToSend[13] << endl;
-    cout <<  "bytesToSend[14]"<< " is " << (int)bytesToSend[14] << endl;
-    cout <<  "bytesToSend[15]"<< " is " << (int)bytesToSend[15] << endl;
+    for(int i = 0; i < 16; i++){
+        cout <<  "bytesToSend[i] "<< " is  " << (int)bytesToSend[i] << endl;
+    }
 
-	
 }
 
 //--------------------------------------------------------------
